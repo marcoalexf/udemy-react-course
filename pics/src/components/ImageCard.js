@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { saveImage } from '../services/UnsplashService';
+import './ImageCard.css'
 
 export default class ImageCard extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            spans: 0
+            spans: 0,
+            selected: false,
         }
         
         this.imageRef = React.createRef();
@@ -24,11 +25,30 @@ export default class ImageCard extends Component {
     }
 
     downloadImage = () => {
-        saveImage(this.imageRef.current.src);
+        this.setState({selected: !this.state.selected}, () => {
+            if (this.state.selected) {
+                this.props.addImageToQueue(this.imageRef.current.src);
+            } else {
+                this.props.removeImageFromQueue(this.imageRef.current.src);
+            } 
+        });
     }
 
     render() {
         const { description, urls } = this.props.image
+        if (this.state.selected) {
+            return (
+                <div style={{gridRowEnd: `span ${this.state.spans}`}}>
+                    <i className="check circle large icon"></i>
+                    <img 
+                    ref={this.imageRef}
+                    alt={description}
+                    src={urls.regular}
+                    onClick={this.downloadImage}
+                    />
+                </div>
+            )
+        }
         return (
             <div style={{gridRowEnd: `span ${this.state.spans}`}}>
                 <img 
