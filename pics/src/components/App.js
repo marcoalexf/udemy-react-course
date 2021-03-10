@@ -14,7 +14,7 @@ export default class App extends React.Component {
     onFormSubmit = (payload) => {
         this.setState({loading: true});
         getPhoto(payload).then(response => {
-            this.setState({images: response.data.results || [], loading: false})
+            this.setState({images: response.data.results || [], loading: false, queue: []})
         });
     }
 
