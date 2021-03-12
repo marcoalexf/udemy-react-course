@@ -25,3 +25,14 @@ const _fetchUser = _.memoize((id, dispatch) =>  {
 })
 
 export const fetchUserMemoized = id => dispatch => _fetchUser(id, dispatch)
+
+const fetchUserNonMemoized = (id, dispatch) =>  {
+    jsonPLaceholder
+    .get(`/users/${id}`)
+        .then(({data}) => {
+            return dispatch({
+                type: 'FETCH_USER',
+                payload: data
+            })
+        })
+}
