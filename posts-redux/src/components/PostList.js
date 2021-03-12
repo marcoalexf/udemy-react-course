@@ -1,6 +1,11 @@
-import React, { useEffect } from 'react'
-import { connect, useSelector, useDispatch } from 'react-redux'
-import { fetchPosts } from '../actions'
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchPosts, fetchUser } from '../actions'
+import UserHeader from './UserHeader';
+
+const getUser = userId => {
+
+}
 
 const PostList = () => {
     const posts = useSelector(state => state.posts);
@@ -21,6 +26,7 @@ const PostList = () => {
                         <p>{el.body}</p>
                     </div>
                 </div>
+                <UserHeader userId={el.userId} />
             </div>
         )
     })
