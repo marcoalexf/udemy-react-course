@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header } from './components/Header';
@@ -26,13 +26,13 @@ export const App = () => {
     <div className="ui container">
       <BrowserRouter>
         <Header />
-        <div>
-          <Route path="" exact component={StreamList}/>
+        <Switch>
+          <Route path="/" exact component={StreamList}/>
           <Route path="/streams/show" component={StreamShow}/>
           <Route path="/streams/new" component={StreamCreate}/>
           <Route path="/streams/edit" component={StreamEdit}/>
           <Route path="/streams/delete" component={StreamDelete}/>
-        </div>
+        </Switch>
       </BrowserRouter>
     </div>
   );
