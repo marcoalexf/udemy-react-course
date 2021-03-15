@@ -6,6 +6,7 @@ export const Header = () => {
     return (
         <div className="ui secondary pointing menu">
             <Link to="/" className="item">Home</Link>
+            <Link to="/streams/new" className="item">Create</Link>
             <div className="right menu">
                 <Link to="/" className="item">All Streams</Link>
                 <GoogleAuth />

@@ -1,3 +1,5 @@
+import { SIGN_IN, SIGN_OUT, UPDATE_FORM_STATE } from "./types";
+
 export const tryLogIn = () => dispatch => {
     window.gapi.load('client:auth2', () => {
         window.gapi.client.init({
@@ -9,8 +11,8 @@ export const tryLogIn = () => dispatch => {
             authInstance.signIn()
             .then(response => {
                 dispatch({
-                    type: '[AUTH] Login',
-                    payload: true
+                    type: SIGN_IN,
+                    payload: {userId: authInstance.currentUser.get().getId()}
                 })
             })
         });
@@ -28,10 +30,18 @@ export const tryLogOut = () => dispatch => {
             authInstance.signOut()
             .then(response => {
                 dispatch({
-                    type: '[AUTH] Logout',
+                    type: SIGN_OUT,
                     payload: false
                 })
             })
         });
     });
+}
+
+export const updateFormState = (form, formId) => dispatch => {
+    debugger;
+    dispatch({
+        type: UPDATE_FORM_STATE,
+        payload: { form, formId }
+    })
 }
